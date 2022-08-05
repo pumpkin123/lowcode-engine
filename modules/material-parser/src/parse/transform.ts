@@ -4,6 +4,7 @@ import { debug } from '../core';
 
 const log = debug.extend('parse:transform');
 
+// 对应的type类型赚自定义类型
 export function transformType(itemType: any) {
   if (typeof itemType === 'string') return itemType;
   const {
@@ -184,6 +185,9 @@ export function transformType(itemType: any) {
       break;
     case (name.match(/JSX\.Element$/) || {}).input:
       result.type = 'element';
+      break;
+    case 'React.CSSProperties':
+      result.type = 'style';
       break;
     default:
       result.type = 'object';
